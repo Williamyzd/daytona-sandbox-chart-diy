@@ -57,6 +57,11 @@ spec:
               value: {{ .Values.services.api.env.OTEL_ENABLED | default "false" | quote }}
             - name: SKIP_USER_EMAIL_VERIFICATION
               value: {{ .Values.services.api.env.SKIP_USER_EMAIL_VERIFICATION | default "false" | quote }}
+            # TLS configuration
+            {{- if .Values.services.api.env.NODE_EXTRA_CA_CERTS }}
+            - name: NODE_EXTRA_CA_CERTS
+              value: {{ .Values.services.api.env.NODE_EXTRA_CA_CERTS | quote }}
+            {{- end }}
             # Database configuration
             {{- if .Values.postgresql.enabled }}
             - name: DB_HOST

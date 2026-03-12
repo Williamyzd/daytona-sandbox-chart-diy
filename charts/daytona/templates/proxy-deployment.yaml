@@ -115,6 +115,11 @@ spec:
               value: {{ .Values.dex.config.clientId | default "daytona" | quote }}
             - name: OIDC_CLIENT_SECRET
               value: {{ .Values.services.proxy.env.OIDC_CLIENT_SECRET | default "" | quote }}
+            # TLS configuration
+            {{- if .Values.services.proxy.env.NODE_EXTRA_CA_CERTS }}
+            - name: NODE_EXTRA_CA_CERTS
+              value: {{ .Values.services.proxy.env.NODE_EXTRA_CA_CERTS | quote }}
+            {{- end }}
             - name: OIDC_DOMAIN
               value: {{ $dexIssuerUrl | quote }}
             - name: OIDC_PUBLIC_DOMAIN

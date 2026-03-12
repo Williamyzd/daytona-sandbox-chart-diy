@@ -78,9 +78,8 @@ services:
       ENVIRONMENT: "production"
       PORT: "3000"
 
-      # TLS configuration - disable certificate verification for self-signed certificates
-      # WARNING: Only use this for development/testing environments
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      # TLS configuration - trust the self-signed CA certificate
+      NODE_EXTRA_CA_CERTS: "/etc/ssl/certs/dex-ca.crt"
 
       # OIDC configuration
       OIDC_CLIENT_ID: ""
@@ -155,7 +154,11 @@ services:
     #   - name: secrets-store
     #     mountPath: /mnt/secrets-store
     #     readOnly: true
-    extraVolumeMounts: []
+    extraVolumeMounts:
+      - name: dex-tls-secret
+        mountPath: /etc/ssl/certs/dex-ca.crt
+        subPath: ca.crt
+        readOnly: true
 
     # Extra volumes for the pod
     # Use this to add volumes from the Secrets Store CSI Driver or other sources
@@ -167,7 +170,13 @@ services:
     #       readOnly: true
     #       volumeAttributes:
     #         secretProviderClass: "my-secret-provider"
-    extraVolumes: []
+    extraVolumes:
+      - name: dex-tls-secret
+        secret:
+          secretName: "sandbox.ze-dong.cn-tls"
+          items:
+            - key: ca.crt
+              path: ca.crt
 
     # Resource limits and requests
     resources:
@@ -298,15 +307,24 @@ services:
       PROXY_API_KEY: "super_secret_key"
       PROXY_PROTOCOL: http
       OIDC_CLIENT_SECRET: ""
-      # TLS configuration - disable certificate verification for self-signed certificates
-      # WARNING: Only use this for development/testing environments
-      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+      # TLS configuration - trust the self-signed CA certificate
+      NODE_EXTRA_CA_CERTS: "/etc/ssl/certs/dex-ca.crt"
     # Extra environment variables (for valueFrom or additional custom vars)
     extraEnv: []
     # Extra volume mounts for the container (e.g. Secrets Store CSI Driver)
-    extraVolumeMounts: []
+    extraVolumeMounts:
+      - name: dex-tls-secret
+        mountPath: /etc/ssl/certs/dex-ca.crt
+        subPath: ca.crt
+        readOnly: true
     # Extra volumes for the pod (e.g. Secrets Store CSI Driver)
-    extraVolumes: []
+    extraVolumes:
+      - name: dex-tls-secret
+        secret:
+          secretName: "sandbox.ze-dong.cn-tls"
+          items:
+            - key: ca.crt
+              path: ca.crt
     # Resource limits and requests
     resources:
       limits:
