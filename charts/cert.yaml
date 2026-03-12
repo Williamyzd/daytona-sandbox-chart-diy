@@ -1,0 +1,27 @@
+# selfsigned-issuer.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: selfsigned-issuer
+  namespace: default   # 替换为你的命名空间
+spec:
+  selfSigned: {}
+
+--- 
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sandbox.ze-dong.cn-tls
+  namespace: default
+spec:
+  # 生成的证书和私钥将存放在这个 Secret 中
+  secretName: sandbox.ze-dong.cn-tls
+  duration: 2160h  # 90 天
+  renewBefore: 360h  # 提前 15 天续签
+  commonName: sandbox.ze-dong.cn
+  dnsNames:
+  - sandbox.ze-dong.cn
+  - *.sandbox.ze-dong.cn
+  issuerRef:
+    name: selfsigned-issuer
+    kind: Issuer
