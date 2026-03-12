@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  gogs:
+    image: ghcr.io/gogs/gogs:next-latest   
+    container_name: gogs
+    ports:
+      - "10022:22"
+      - "8810:3000"
+    volumes:
+      - /opt/gogs:/data
+    restart: unless-stopped
+
