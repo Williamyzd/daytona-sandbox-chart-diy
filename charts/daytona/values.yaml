@@ -78,12 +78,16 @@ services:
       ENVIRONMENT: "production"
       PORT: "3000"
 
+      # TLS configuration - disable certificate verification for self-signed certificates
+      # WARNING: Only use this for development/testing environments
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
+
       # OIDC configuration
       OIDC_CLIENT_ID: ""
       OIDC_ISSUER_BASE_URL: ""
       PUBLIC_OIDC_DOMAIN: ""
       OIDC_AUDIENCE: ""
-      SKIP_USER_EMAIL_VERIFICATION: "false"
+      SKIP_USER_EMAIL_VERIFICATION: "true"
 
       # Workspace configuration
       DEFAULT_SNAPSHOT_IMAGE_NAME: "daytonaio/sandbox:0.5.1-slim"
@@ -294,6 +298,9 @@ services:
       PROXY_API_KEY: "super_secret_key"
       PROXY_PROTOCOL: http
       OIDC_CLIENT_SECRET: ""
+      # TLS configuration - disable certificate verification for self-signed certificates
+      # WARNING: Only use this for development/testing environments
+      NODE_TLS_REJECT_UNAUTHORIZED: "0"
     # Extra environment variables (for valueFrom or additional custom vars)
     extraEnv: []
     # Extra volume mounts for the container (e.g. Secrets Store CSI Driver)
