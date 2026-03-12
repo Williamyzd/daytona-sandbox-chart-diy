@@ -19,10 +19,10 @@ spec:
   secretName: "sandbox.ze-dong.cn-tls"
   duration: 2160h  # 90 天
   renewBefore: 360h  # 提前 15 天续签
-  commonName: sandbox.ze-dong.cn
+  commonName: "sandbox.ze-dong.cn"
   dnsNames:
-  - sandbox.ze-dong.cn
-  - *.sandbox.ze-dong.cn
+  - "sandbox.ze-dong.cn"
+  - "*.sandbox.ze-dong.cn"
   issuerRef:
     name: selfsigned-issuer
     kind: Issuer
