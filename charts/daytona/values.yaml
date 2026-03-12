@@ -51,7 +51,7 @@ services:
       # The secret must already exist in the cluster or be managed externally
       tlsSecretName: ""
       # Enable self-signed certificates
-      selfSigned: false
+      selfSigned: true
       # Custom TLS certificates as secrets
       # NOTE: 'key' and 'certificate' are expected in PEM format
       # NOTE: 'name' should match the secretName used in ingress TLS configuration
@@ -264,7 +264,7 @@ services:
       # The secret must already exist in the cluster or be managed externally
       tlsSecretName: ""
       # Enable self-signed certificates
-      selfSigned: false
+      selfSigned: true
       # Custom TLS certificates as secrets
       # NOTE: 'key' and 'certificate' are expected in PEM format
       # NOTE: 'name' should match the secretName used in ingress TLS configuration
@@ -651,7 +651,7 @@ dex:
     # The secret must already exist in the cluster or be managed externally
     tlsSecretName: ""
     # Enable self-signed certificates
-    selfSigned: false
+    selfSigned: true
     # Custom TLS certificates as secrets
     # NOTE: 'key' and 'certificate' are expected in PEM format
     # NOTE: 'name' should match the secretName used in ingress TLS configuration
